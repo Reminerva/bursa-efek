@@ -2,6 +2,7 @@ package com.bursaefek.bursaefek.security;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -11,8 +12,10 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 @Component
 public class JwtTokenProvider {
 
-    private String SECRET_KEY = "abcd";
-    private Long EXPIRATION_TIME = 86400000L;
+    @Value("${secret.key}")
+    private String SECRET_KEY;
+    @Value("${expiration.time}")
+    private Long EXPIRATION_TIME;
 
     public String getUsernameFromToken(String token){
         DecodedJWT decodedJWT = getDecodedJWT(token);
